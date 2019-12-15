@@ -51,20 +51,28 @@ int caculate(int digitalCardNumber[], int totalDigital){
 }
 int main() {
     string cardNumberWord;
-    long long cardNum;
+    long long cardNum = 0;
+    // 避免位數搞混，故空下[0]的位置並多給一個空間
     int digitalCardNumber[17];
     int totalDigital;
 
-    cin >> cardNumberWord; 
-    for(int i = 0; i < cardNumberWord.size(); i++){
-        if(cardNumberWord.c_str()[i] > '9' || cardNumberWord.c_str()[i] < '0'){
+    cin >> cardNumberWord;
+
+    for(int i = 0; cardNumberWord[i] != '\0'; i++){
+        if(cardNumberWord[i] > '9' || cardNumberWord[i] < '0'){
             cout << "有非數字的字元";
             return 0;
         }
+        //cout << cardNumberWord[i];
+        //將字串轉回數字型態的卡號，即可用前次作業的方法判斷
+        cardNum = cardNum * 10;
+        cardNum = cardNum + (cardNumberWord[i] - '0');
+        //cout << cardNum << "\n";
     } 
+ 
 
     cardNum=stoll(cardNumberWord);
-
+    
     if (( 999999999999 < cardNum) && (cardNum < 10000000000000)){
         cout << "看來你不是憨包(13位數)";
         totalDigital = 13;
@@ -108,3 +116,4 @@ int main() {
         cout << "直接抱緊處理";
 
 }
+
